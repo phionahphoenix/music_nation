@@ -1,0 +1,67 @@
+{% load static %}
+<html>
+  <head>
+    <title>{%block title%}music_nation{%endblock%}</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'music_nation/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'music_nation/css/music_nation.css' %}">
+  </head>
+  <body>
+    <div >
+      <header>
+        <nav>
+          <div class = row>
+            <div class="col">
+              <div class="d-inline-flex" style="margin-top: 60px;">
+                <div class="mx-5 ">
+                  <a  href="/about/">About us</a>
+                </div>
+                <div class="mx-5">
+                  <a href="/our_team/">Our Team</a>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <a class="base-a-img" href="{% url 'music_nation:home' %}">
+                <img src="{% static 'music_nation/img/music_nation.png' %}" style="width:150px;" alt="logo">
+            </a>
+            </div>
+            {% if user.is_authenticated %}
+            <div class="col">
+              <div class="d-inline-flex" style="margin-top: 60px;">
+                <div class="mx-5">
+                  <a  href="{% url 'music_nation:logout' %}">LogOut</a>
+                </div>
+                <div class="mx-5">
+                  <a href="{% url 'music_nation:add_album' user %}">Add Album</a>
+                </div>
+                <div class="mx-5">
+                  <a  href="{% url 'music_nation:profile_detail' user %}">{{ user.username }}</a>
+                </div>
+              </div>
+            </div>
+            {% else %}
+            <div class="col">
+              <div class="d-inline-flex icon" style="margin-top: 60px;">
+                <div class="mx-5">
+                  <a  href="{% url 'music_nation:login' %}">Login</a>
+                </div>
+                <div class="mx-5">
+                  <a  href="{% url 'music_nation:signup' %}">SignUp</a>
+                </div>
+              </div>
+            </div>
+            {% endif %}
+          </div>
+      </nav>
+      
+      </header>
+    </div>
+    <div>
+      {%block content%}
+      {%endblock%}
+    </div>
+
+  </body>
+</html>

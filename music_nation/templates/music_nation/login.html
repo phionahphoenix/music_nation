@@ -1,0 +1,19 @@
+{% extends 'music_nation/base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<h3><strong>You are already logged in</strong></h3>
+<small style="font-size: 14px;"><em>Do you want to <a href="{% url 'music_nation:logout' %}" style="color: blue;"><strong>LogOut</strong></a></em></small>
+
+{% else %}
+  <h2 style="font-size: 24px;">Login</h2>
+  <form method="post" style="margin-top: 20px;">
+    {% csrf_token %}
+    <input type="hidden" name="next" value="{{ next }}" style="display: block; margin-bottom: 10px;">
+    {{ form.as_p }}
+    <button type="submit" style="background-color: #007bff; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer;">Login</button>
+  </form>
+{% endif %}
+{% endblock %}
